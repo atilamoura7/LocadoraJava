@@ -1,5 +1,11 @@
-# LocadoraJava
-Sistema de locação desenvolvido em Java para prática de conceitos: Orientação a Objetos, tratamento de exceções, Criação de interface gráfica JFrame utilizando a biblioteca Swing com conexão a um Banco de Dados em MySql.
+Gostaria de compartilhar um projeto que desenvolvi como parte do meu estudo na disciplina de Programação II,
+focado em Java Orientado a Objetos. A aplicação é um sistema de locadora de veículos com funcionalidades básicas,
+como cadastro de clientes e veículos, além da realização e cálculo do valor de locação com base no total de dias informado.
+Utilizando a biblioteca Swing, criei uma interface JFrame para uma experiência amigável aos usuários.
+Além disso, para garantir a persistência dos dados, integrei o sistema a um Banco de Dados MySQL. 
+A prática envolveu o uso de conceitos de orientação a objetos, tratamento de exceções com Try/Catch e a aplicação de boas práticas de desenvolvimento.
+Nesse video mostro o projeto em execução, meu Linkedin: https://www.linkedin.com/posts/%C3%A1tila-moura_java-programacaoorientadaaobjetos-swing-activity-7116495390052368384-bfPi?utm_source=share&utm_medium=member_desktop   Deixe seu líke, algum feedback com certeza me ajudará bastante 💻📚⚙.
+
 Parte gráfica utilizando biblioteca Swing, JFrame para tornar uma experiência mais agradável aos usuários.
 Menu de opções 
 ![Menu opção](https://github.com/atilamoura7/LocadoraJava/assets/135074615/e47bdca9-45ae-4b61-af22-d9b85bc91acc)
