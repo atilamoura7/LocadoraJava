@@ -6,7 +6,6 @@ Além disso, para garantir a persistência dos dados, integrei o sistema a um Ba
 A prática envolveu o uso de conceitos de orientação a objetos, tratamento de exceções com Try/Catch e a aplicação de boas práticas de desenvolvimento.
 Nesse video mostro o projeto em execução, meu Linkedin: https://www.linkedin.com/posts/%C3%A1tila-moura_java-programacaoorientadaaobjetos-swing-activity-7116495390052368384-bfPi?utm_source=share&utm_medium=member_desktop   Deixe seu líke, algum feedback com certeza me ajudará bastante 💻📚⚙.
 
-Parte gráfica utilizando biblioteca Swing, JFrame para tornar uma experiência mais agradável aos usuários.
 Menu de opções 
 ![Menu opção](https://github.com/atilamoura7/LocadoraJava/assets/135074615/e47bdca9-45ae-4b61-af22-d9b85bc91acc)
 
