@@ -4,7 +4,7 @@ como cadastro de clientes e veículos, além da realização e cálculo do valor
 Utilizando a biblioteca Swing, criei uma interface JFrame para uma experiência amigável aos usuários.
 Além disso, para garantir a persistência dos dados, integrei o sistema a um Banco de Dados MySQL. 
 A prática envolveu o uso de conceitos de orientação a objetos, tratamento de exceções com Try/Catch e a aplicação de boas práticas de desenvolvimento.
-Nesse video mostro o projeto em execução, meu Linkedin: https://www.linkedin.com/posts/%C3%A1tila-moura_java-programacaoorientadaaobjetos-swing-activity-7116495390052368384-bfPi?utm_source=share&utm_medium=member_desktop   Deixe seu líke, algum feedback com certeza me ajudará bastante 💻📚⚙.
+Nesse video mostro o projeto em execução, meu Linkedin: https://www.linkedin.com/posts/atilamoura7_java-programacaoorientadaaobjetos-swing-activity-7116495390052368384-AdLy?utm_source=share&utm_medium=member_desktop Deixe seu líke, algum feedback com certeza me ajudará bastante 💻📚⚙.
 
 Menu de opções 
 
