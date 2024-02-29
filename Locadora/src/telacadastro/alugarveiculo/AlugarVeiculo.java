@@ -9,6 +9,9 @@ import conexao.alugardao.AlugarDao;
 import conexao.pessoadao.ClienteDao;
 import conexao.veiculodao.VeiculoDao;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import pessoamodel.Cliente;
@@ -28,7 +31,6 @@ public class AlugarVeiculo extends javax.swing.JFrame {
         this.setVisible(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,7 +123,7 @@ public class AlugarVeiculo extends javax.swing.JFrame {
         });
 
         jLabel9.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel9.setText("*Insira os dados no formato da orientação do campo");
+        jLabel9.setText("*Preencha todos os campos corretamente");
 
         exemploCpf.setText("Ex: 123.456.789-10");
 
@@ -146,13 +148,6 @@ public class AlugarVeiculo extends javax.swing.JFrame {
                         .addComponent(btnListaVeiculosDisponiveis))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jLabel3)
-                        .addGap(106, 106, 106)
-                        .addComponent(campoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(exemploCpf))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(campoPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,15 +160,19 @@ public class AlugarVeiculo extends javax.swing.JFrame {
                         .addComponent(exemploData))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jLabel8)
-                        .addGap(63, 63, 63)
-                        .addComponent(campoDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(btnBuscarVeiculo))
+                        .addComponent(jLabel3)
+                        .addGap(106, 106, 106)
+                        .addComponent(campoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(exemploCpf))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jLabel9)))
+                        .addComponent(jLabel8)
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(campoDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscarVeiculo))))
                 .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
@@ -211,10 +210,11 @@ public class AlugarVeiculo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(campoDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscarVeiculo)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9))
+                .addContainerGap())
         );
 
         pack();
@@ -229,31 +229,32 @@ public class AlugarVeiculo extends javax.swing.JFrame {
         // TODO add your handling code here:
         try 
         {   
-            if (campoCpf.getText().trim().isEmpty() || campoPlaca.getText().trim().isEmpty() ||campoDataInicio.getText().trim().isEmpty() || campoDataFim.getText().trim().isEmpty()) 
+            //se retornar ok nao pede pra preencher os campos 
+            if ((verificaCpf())&&(verificaPlaca())&&verificaData()) 
             {
-             
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
-            } 
-            else
-            {
-              if((ClienteDao.isClienteCadastrado(campoCpf.getText()))&&(VeiculoDao.isVeiculoDisponivel(campoPlaca.getText())))
+                 
+                 if((ClienteDao.isClienteCadastrado(campoCpf.getText()))&&(VeiculoDao.isVeiculoDisponivel(campoPlaca.getText())))
                 {
                     Cliente cliente = ClienteDao.clienteCadastrado(campoCpf.getText());
                     Veiculo veiculo = VeiculoDao.veiculoDisponivel(campoPlaca.getText());
                     Alugar alugar = new Alugar(cliente, veiculo,campoDataInicio.getText(),campoDataFim.getText());
                     AlugarDao.registroAluguel(alugar);
                     VeiculoDao.setVeiculoIndisponivel(veiculo.getIdVeiculo());
-                    JOptionPane.showMessageDialog(null, alugar.toString(), "Cadastro Realizado", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Cadastro Realizado", "Sucesso ao Cadastrar Locação", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                 {
                     JOptionPane.showMessageDialog(null, "Não foi possivel prosseguir tente novamente", "ERRO", JOptionPane.INFORMATION_MESSAGE);
                 }  
+            } 
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar o aluguel no sistema"+e, "ERRO NO CADASTRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar o aluguel no sistema, Exception: "+ e, "ERRO NO CADASTRO", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_btnBuscarVeiculoActionPerformed
@@ -306,7 +307,7 @@ public class AlugarVeiculo extends javax.swing.JFrame {
             campoDataFim.setText("03/01/20223");
         }*/
     }//GEN-LAST:event_campoDataFimFocusLost
-
+    
     /**
      * @param args the command line arguments
      */
@@ -341,7 +342,82 @@ public class AlugarVeiculo extends javax.swing.JFrame {
             }
         });
     }
-
+    private boolean verificaCpf()
+    {
+        //se o campo não estiver vazio
+        if(!(campoCpf.getText().trim().isEmpty()))
+        { 
+            String cpf = campoCpf.getText();
+            try
+            {
+                Cliente cliente = new Cliente();
+                //verifica se apenas numeros foram inseridos
+                cpf = cpf.replaceAll("[^0-9]", "");
+                Long.parseLong(cpf);
+                campoCpf.setText(cliente.formatarCpf(cpf));
+                return true;    
+            }
+            catch(NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "Insira apenas números, Exception: "+ e, "Cpf", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    private boolean verificaPlaca()
+    {
+        if(!campoPlaca.getText().trim().isEmpty())
+        {
+            try
+            {
+                String placa = campoPlaca.getText();
+                Veiculo veiculo = new Veiculo();
+                placa = veiculo.formatarPlaca(placa);
+                campoPlaca.setText(placa);
+                return true;
+                
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Não foi possivel verificar placa, Exception: "+ e, "Verifica Placa", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    private boolean verificaData()
+    {
+        if((campoDataInicio.getText().trim().isEmpty()) || (campoDataFim.getText().trim().isEmpty()))
+        {
+            return false;
+        }
+        else
+        {
+            
+            try
+            {
+               Alugar alugar = new Alugar();
+               String dataInicio = alugar.formatarData(campoDataInicio.getText());
+               campoDataInicio.setText(dataInicio);
+               String dataFim = alugar.formatarData(campoDataFim.getText());
+               campoDataFim.setText(dataFim);
+               return true;
+            }
+            catch (Exception e)
+            {
+                // Se ocorrer uma exceção ao fazer parsing, a data é inválida ou está no formato incorreto
+                JOptionPane.showMessageDialog(null, "Formato da data está inválido, Exception: "+ e, "Erro Data", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarVeiculo;
     private javax.swing.JButton btnListaVeiculosDisponiveis;

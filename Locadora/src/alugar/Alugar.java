@@ -8,7 +8,7 @@ import veiculomodel.Veiculo;
 
 public class Alugar
 {
-    private Integer idAluguel;
+    private Integer id;
     private Cliente cliente;
     private Veiculo veiculo;
     private Integer idCliente;
@@ -17,6 +17,7 @@ public class Alugar
     private LocalDate dataFim;
     private Double valor; 
     private Double dias;
+    private Boolean ativo;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
    
     public Alugar(Cliente cliente, Veiculo veiculo, String dataInicio, String dataFim)
@@ -26,20 +27,32 @@ public class Alugar
         this.setDataInicio(dataInicio);
         this.setDataFim(dataFim);
         this.calcularDias(this.getDataInicio(), this.getDataFim());
+        this.setAtivo(true);
+        calcularAluguel();
+    }
+    public Alugar(Integer id, Cliente cliente, Veiculo veiculo, String dataInicio, String dataFim)
+    {
+        this.setId(id);
+        this.setCliente(cliente);
+        this.setVeiculo(veiculo);
+        this.setDataInicio(dataInicio);
+        this.setDataFim(dataFim);
+        this.calcularDias(this.getDataInicio(), this.getDataFim());
+        this.setAtivo(true);
         calcularAluguel();
     }
     public Alugar()
     {
         
     }
-    public Integer getIdAluguel()
+    public Integer getId()
     {
-        return idAluguel;
+        return id;
     }
 
-    public void setIdAluguel(int idAluguel)
+    public void setId(int id)
     {
-        this.idAluguel = idAluguel;
+        this.id = id;
     }
     
     public Cliente getCliente()
@@ -81,8 +94,6 @@ public class Alugar
         this.dataFim = LocalDate.parse(dataFim, formatter);
     }
 
-  
-
     public Double getValor() {
         return valor;
     }
@@ -99,8 +110,8 @@ public class Alugar
         return this.dias;
     }
 
-    public void setIdAluguel(Integer idAluguel) {
-        this.idAluguel = idAluguel;
+    public void setIdAluguel(Integer id) {
+        this.id = id;
     }
 
     public void setIdCliente(Integer idCliente) {
@@ -125,6 +136,16 @@ public class Alugar
 
     public Integer getIdVeiculo() {
         return idVeiculo;
+    }
+    
+    public Boolean isAtivo()
+    {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo)
+    {
+        this.ativo = ativo;
     }
     
     public void calcularAluguel()
@@ -152,8 +173,23 @@ public class Alugar
     }
     public String toString()
     {
-        return "Cliente: "+this.getCliente().getNome()+", Cpf: "+this.getCliente().getCpf()+", Telefone: "+this.getCliente().getTelefone()
+        return "Número do Cadastro: "+this.getId()+"\nCliente: "+this.getCliente().getNome()+", Cpf: "+this.getCliente().getCpf()+", Telefone: "+this.getCliente().getTelefone()
                 +"\nVeículo Marca: "+this.getVeiculo().getMarca()+", Modelo: "+this.getVeiculo().getModelo()+", Placa: "+this.getVeiculo().getPlaca()+", Data Fim: "+this.getDataFim().format(formatter)+", Valor: R$"+this.getValor()+"\n";
+    }
+    public String formatarData(String data)
+    {
+        data = data.replaceAll("[^0-9]", "");
+       
+        if((data==null)||(data.isEmpty()))
+        {
+            System.out.println("Erro ao formatar data");
+            return null;
+        }
+        else
+        {
+            data = data.substring(0,2)+"/"+data.substring(2,4)+"/"+data.substring(4,8);
+            return data;
+        }
     }
 }
     

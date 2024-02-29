@@ -42,14 +42,6 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="106" pref="106" max="-2" attributes="0"/>
-                      <Component id="campoCpf" min="-2" pref="128" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="exemploCpf" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                       <Component id="campoPlaca" min="-2" pref="128" max="-2" attributes="0"/>
@@ -62,19 +54,23 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="exemploData" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="106" pref="106" max="-2" attributes="0"/>
+                      <Component id="campoCpf" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="exemploCpf" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="63" pref="63" max="-2" attributes="0"/>
-                      <Component id="campoDataFim" min="-2" pref="128" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="168" pref="168" max="-2" attributes="0"/>
-                      <Component id="btnBuscarVeiculo" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
-                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          <Component id="campoDataFim" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="btnBuscarVeiculo" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -125,10 +121,11 @@
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   <Component id="campoDataFim" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
-              <Component id="btnBuscarVeiculo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnBuscarVeiculo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -233,7 +230,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="*Insira os dados no formato da orienta&#xe7;&#xe3;o do campo"/>
+        <Property name="text" type="java.lang.String" value="*Preencha todos os campos corretamente"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="exemploCpf">

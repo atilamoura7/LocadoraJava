@@ -50,7 +50,7 @@ public class Cliente
 
     public void setCpf(String cpf)
     {
-        this.cpf =   formatarCPF(cpf);
+        this.cpf =   formatarCpf(cpf);
     }
 
     public String getTelefone() 
@@ -62,8 +62,7 @@ public class Cliente
     {
         this.telefone = aplicarMascara(telefone);
     }
-    
-    private static String formatarCPF(String cpf) 
+    public String formatarCpf(String cpf) 
     {
         // Verifica se o CPF tem o formato correto (11 dígitos)
         if (cpf.matches("^[0-9]{11}$")) {
@@ -78,7 +77,20 @@ public class Cliente
             return cpf;
         }
     }
-    
+    public String formataCpf(String cpf)
+    {
+        if(cpf.length()==11)
+        {
+            cpf = cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9, 11);
+            return cpf;
+        }
+        else
+        {
+            System.out.println("Informe um cpf válido!");
+            return null;
+        }
+        
+    }
     public void setDataNascimento(String dataNascimento)
     {
        this.dataNascimento = LocalDate.parse(dataNascimento, formatter);

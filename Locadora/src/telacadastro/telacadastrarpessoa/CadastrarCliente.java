@@ -1,6 +1,9 @@
 package telacadastro.telacadastrarpessoa;
+import alugar.Alugar;
 import conexao.pessoadao.ClienteDao;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import pessoamodel.Cliente;
@@ -95,7 +98,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         });
 
         jLabel5.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel5.setText("*Insira os dados no formato da orientação do campo");
+        jLabel5.setText("*Preencha todos os campos ");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Telefone:");
@@ -197,11 +200,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         try
         {
            
-            if((campoNome.getText().trim().isEmpty())||(campoCpf.getText().trim().isEmpty())||(campoDataNascimento.getText().trim().isEmpty())||(campoTelefone.getText().trim().isEmpty()))
-            {
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-            else
+            if(verificaNome() && verificaCpf() && verificaData() && verificaTelefone())
             {
                 Cliente cliente = new Cliente();
                 cliente.setNome(campoNome.getText());
@@ -211,10 +210,15 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 ClienteDao.cadastrarCliente(cliente);
                 this.setVisible(false);
             }
+            else
+            {
+                
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Execetion: "+e,"Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não foi possivel validar formulário, Execetion: "+e,"Cadastrar Cliente", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -304,7 +308,110 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
     }
-
+    private boolean verificaNome()
+    {
+        if(!(campoNome.getText().trim().isEmpty()))
+        {
+            try
+            {
+                String regex = "^[a-zA-Z ]+$";
+                String nome = campoNome.getText();
+                if(Pattern.matches(regex, nome))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+            catch(Exception e)
+            {
+               JOptionPane.showMessageDialog(null, "Insira apenas letras, Exception: "+ e, "Nome", JOptionPane.ERROR_MESSAGE);
+               return false; 
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    private boolean verificaCpf()
+    {
+        //se o campo não estiver vazio
+        if(!(campoCpf.getText().trim().isEmpty()))
+        { 
+            String cpf = campoCpf.getText();
+            try
+            {
+                Cliente cliente = new Cliente();
+                //verifica se apenas numeros foram inseridos
+                cpf = cpf.replaceAll("[^0-9]", "");
+                Long.parseLong(cpf);
+                campoCpf.setText(cliente.formatarCpf(cpf));
+                return true;    
+            }
+            catch(NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "Insira apenas números, Exception: "+e, "Cpf", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    private boolean verificaTelefone()
+    {
+        if(!campoTelefone.getText().trim().isEmpty())
+        {
+            try
+            {
+                Cliente cliente = new Cliente();
+                String telefone = cliente.aplicarMascara(this.campoTelefone.getText());
+                this.campoTelefone.setText(telefone);
+                return true;
+                
+            }
+             catch(NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "Informe um número válido, Exception: "+e, "Erro no telefone", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    private boolean verificaData()
+    {
+        if((campoDataNascimento.getText().trim().isEmpty()))
+        {
+            return false;
+        }
+        else
+        {
+            
+            try
+            {
+               Alugar alugar = new Alugar();
+               String dataNascimento = alugar.formatarData(campoDataNascimento.getText());
+                System.out.println(dataNascimento);
+               campoDataNascimento.setText(dataNascimento);
+               return true;
+            }
+            catch (Exception e)
+            {
+                // Se ocorrer uma exceção ao fazer parsing, a data é inválida ou está no formato incorreto
+                JOptionPane.showMessageDialog(null, "Formato da data está inválido, Exception: "+ e, "Erro Data Inicio/Fim", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField campoCpf;

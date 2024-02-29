@@ -3,6 +3,7 @@ import conexao.alugardao.AlugarDao;
 import conexao.pessoadao.ClienteDao;
 import conexao.veiculodao.VeiculoDao;
 import telacadastro.alugarveiculo.AlugarVeiculo;
+import telacadastro.telaalugueisativos.AlugueisAtivos;
 import telacadastro.telacadastrarveiculo.CadastrarVeiculo;
 import telacadastro.telacadastrarpessoa.CadastrarCliente;
 public class MenuLocacao extends javax.swing.JFrame {
@@ -12,6 +13,7 @@ public class MenuLocacao extends javax.swing.JFrame {
      */
     public MenuLocacao() {
         initComponents();
+        this.setVisible(true);
     }
 
     /**
@@ -183,9 +185,9 @@ public class MenuLocacao extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
+                                .addGap(38, 38, 38)
                                 .addComponent(jLabel6)
-                                .addGap(68, 68, 68)
+                                .addGap(66, 66, 66)
                                 .addComponent(jLabel8))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
@@ -217,7 +219,7 @@ public class MenuLocacao extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrarVeiculo)
@@ -261,7 +263,7 @@ public class MenuLocacao extends javax.swing.JFrame {
 
     private void btnListaAlugueisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaAlugueisActionPerformed
         // TODO add your handling code here:
-        AlugarDao.listaAlugueis();
+        AlugueisAtivos alugueisAtivos = new AlugueisAtivos();
     }//GEN-LAST:event_btnListaAlugueisActionPerformed
 
     /**

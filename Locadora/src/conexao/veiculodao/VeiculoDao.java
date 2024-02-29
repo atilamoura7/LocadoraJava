@@ -276,6 +276,35 @@ public class VeiculoDao
             }
         }
     }
+    public static void setVeiculoDisponivel(Integer id_Veiculo)
+    {
+        String sql = "UPDATE VEICULO SET DISPONIVEL = '1' WHERE ID_VEICULO= ?";
+        PreparedStatement ps = null;
+        try
+        {
+            ps = Conexao.getConexao().prepareStatement(sql);
+            ps.setInt(1, id_Veiculo);
+            ps.execute();
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, "Não foi possivel realizar a atualizacão da disponibilidade do veiculo, exception: "+e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        finally
+        {
+            try
+            {
+                if(ps!=null)
+                {
+                    ps.close();
+                }
+            }
+            catch(SQLException e)
+            {
+                JOptionPane.showMessageDialog(null, "Não foi possivel encerrar os serviços, exepction: "+e, "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
     public static Veiculo getVeiculoAlugado(Integer idVeiculo)
     {
         String sql = "SELECT ID_VEICULO, MARCA, MODELO, PLACA, DISPONIVEL FROM VEICULO WHERE ID_VEICULO = ?";

@@ -60,13 +60,16 @@ public class Veiculo
    {
        return this.disponivel;
    }
-   private static String formatarPlaca(String placa) {
-        // Verifica se a placa tem o formato correto (3 letras seguidas de 4 números)
-        if (placa.matches("^[A-Z]{3}[0-9]{4}$")) {
-            // Aplica a máscara "UUU-9999"
-            return String.format("%s-%s", placa.substring(0, 3), placa.substring(3));
+   public String formatarPlaca(String placa) {
+        // Verifica se a placa tem o formato correto "UUU-9999" ou "UUU-9U99"
+        placa = placa.replaceAll("\\s", "");
+        if (placa.matches("^[A-Z]{3}[0-9]{1}[A-Z0-9]{1}[0-9]{2}$")) {
+            // Aplica a máscara
+            placa = placa.substring(0,3).toUpperCase()+" "+placa.substring(3);
+            return placa;
         } else {
             // Se a placa não está no formato correto, retorna a placa original
+            placa = placa.substring(0,3).toUpperCase()+" "+placa.substring(3);
             return placa;
         }
     }
